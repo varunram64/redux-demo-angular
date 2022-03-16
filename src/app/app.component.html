@@ -1,3 +1,32 @@
-<h1>{{title}}</h1>
-<p>Counter: {{counter$ | async}}</p>
-<button (click)="increment()">Increment</button>
+<div style="display: flex;">
+    <div class="left-pane">
+        <h2>{{title}}</h2>
+        <form [formGroup]="addToDoListForm" (ngSubmit)="addToDoList()">
+            <input type="text" name="contentText" formControlName="contentText" />
+            <button type="submit">Add</button>
+        </form>
+        <ul>
+            <ng-template ngFor let-item [ngForOf]="todoList$ | async" [ngForTrackBy]="trackByFn">
+                <li class="item-ToDo">
+                    <label *ngIf="!item?.delete; else deleteItem">
+                        <div (click)="applyRemove(item)">
+                            {{item.description}}
+                        </div>
+                    </label>
+                    <ng-template #deleteItem>
+                        <label class="strikethrough">
+                            <div (click)="applyRemove(item)">
+                                {{item.description}}
+                            </div>
+                        </label>
+                        <button type="button" (click)="decrement(item)">Remove</button>
+                    </ng-template>
+                    
+                </li>
+            </ng-template>
+        </ul>
+    </div>
+    <div class="right-pane">
+        <app-counter style="width: auto;" [counter]="counter$ | async" [lastUpdate]="lastUpdate$ | async"></app-counter>
+    </div>
+</div>

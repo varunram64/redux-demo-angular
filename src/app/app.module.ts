@@ -8,15 +8,20 @@ import { DevToolsExtension, NgRedux, NgReduxModule } from '@angular-redux/store'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IAppState, INITIAL_STATE, rootReducer } from './store';
+import { AppCounterComponent } from './app-counter/app-counter.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppCounterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgReduxModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

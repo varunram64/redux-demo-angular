@@ -1,0 +1,20 @@
+.left-pane {
+    width: 50%;
+    margin-left: 5%;
+}
+
+.right-pane {
+    width: 50%;
+    margin-left: 5%;
+    min-height: 500px;
+    background-color: #dcdcdc;
+    align-content: center;
+    padding: 10% 15%;
+}
+
+.item-ToDo {
+    margin-top: 10px;
+    border: 3px solid #000;
+    list-style: none;
+    padding: 15px;
+}
