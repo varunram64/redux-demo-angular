@@ -1,4 +1,4 @@
-import { DECREMENT, DELETEALL, INCREMENT } from "./actions";
+import { DECREMENT, DELETEALL, FETCH_TODOS_ERROR, FETCH_TODOS_SUCCESS, INCREMENT } from "./actions";
 import { fromJS, Map } from "immutable";
 
 export interface IAppState {
@@ -29,6 +29,12 @@ export function rootReducer(state: Map<string, any> = Object.assign(fromJS(INITI
         case DELETEALL: {
             let currDate = new Date();
             return state.set('counter', 0).set('todoList', []).set('lastUpdate', `${currDate.getHours() > 9 ? currDate.getHours() : '0' + currDate.getHours().toString()}:${currDate.getMinutes() > 9 ? currDate.getMinutes() : '0' + currDate.getMinutes().toString()}:${currDate.getSeconds() > 9 ? currDate.getSeconds() : '0' + currDate.getSeconds().toString()} ${currDate.getHours() < 12 ? 'AM' : 'PM'}`);
+        }
+        case FETCH_TODOS_SUCCESS: {
+            return state.set('counter', action.payload.length).set('todoList', [...action.payload]).set('lastUpdate', null);
+        }
+        case FETCH_TODOS_ERROR: {
+            return state.set('counter', 0).set('todoList', []).set('lastUpdate', null);
         }
     }
     return state;

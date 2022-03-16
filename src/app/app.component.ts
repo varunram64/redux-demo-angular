@@ -1,9 +1,8 @@
 import { NgRedux, select } from '@angular-redux/store';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Map } from 'immutable';
-import { Observable } from 'rxjs';
 import { DECREMENT, INCREMENT } from './actions';
+import { TodoService } from './services/todo.service';
 import { IAppState, INITIAL_STATE } from './store';
 
 @Component({
@@ -11,7 +10,7 @@ import { IAppState, INITIAL_STATE } from './store';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'To Do List';
   // public get counter() : number {
   //   const state = this.ngRedux.getState();
@@ -22,10 +21,14 @@ export class AppComponent {
   @select(s => s.get('lastUpdate')) lastUpdate$: any;
   @select(s => s.get('todoList')) todoList$: any;
 
-  constructor(private ngRedux: NgRedux<IAppState>, private fb: FormBuilder) {
+  constructor(private ngRedux: NgRedux<IAppState>, private fb: FormBuilder, private todoservice: TodoService) {
     this.addToDoListForm = fb.group({
       contentText: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    this.todoservice.loadToDoList();
   }
 
   get f() {
@@ -38,7 +41,7 @@ export class AppComponent {
       return;
     }
 
-    this.ngRedux.dispatch({ type: INCREMENT, payload: { description: this.f.contentText.value }, state: INITIAL_STATE });
+    this.ngRedux.dispatch({ type: INCREMENT, payload: { title: this.f.contentText.value }, state: INITIAL_STATE });
 
     this.addToDoListForm.reset();
   }

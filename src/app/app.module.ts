@@ -11,6 +11,8 @@ import { IAppState, INITIAL_STATE, rootReducer } from './store';
 import { AppCounterComponent } from './app-counter/app-counter.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     NgReduxModule,
     FormsModule, 

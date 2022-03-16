@@ -10,13 +10,13 @@
                 <li class="item-ToDo">
                     <label *ngIf="!item?.delete; else deleteItem">
                         <div (click)="applyRemove(item)">
-                            {{item.description}}
+                            {{item.title}}
                         </div>
                     </label>
                     <ng-template #deleteItem>
                         <label class="strikethrough">
                             <div (click)="applyRemove(item)">
-                                {{item.description}}
+                                {{item.title}}
                             </div>
                         </label>
                         <button type="button" (click)="decrement(item)">Remove</button>

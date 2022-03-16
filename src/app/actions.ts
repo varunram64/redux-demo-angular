@@ -1,3 +1,6 @@
 export const INCREMENT = "INCREMENT";
 export const DELETEALL = "DELETEALL";
 export const DECREMENT = "DECREMENT";
+export const FETCH_TODOS_SUCCESS = "FETCH_TODOS_SUCCESS";
+export const FETCH_TODOS_ERROR = "FETCH_TODOS_ERROR";
+
