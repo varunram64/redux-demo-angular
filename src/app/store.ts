@@ -2,17 +2,17 @@ import { INCREMENT } from "./actions";
 import { fromJS, Map } from "immutable";
 
 export interface IAppState {
-    counter: number;
+    counter: any;
 }
 
 export const INITIAL_STATE: IAppState = {
     counter: 0
 }
 
-export function rootReducer(state: IAppState = INITIAL_STATE, action: any): IAppState {
+export function rootReducer(state: Map<string, any> = Object.assign(fromJS(INITIAL_STATE)), action: any): Map<string, any> {
     switch (action.type) {
         case INCREMENT:
-            return { counter: state.counter + 1 };
+            return state.set('counter', state.get('counter') + 1);
     }
     return state;
 }

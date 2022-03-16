@@ -16,14 +16,14 @@ import { IAppState, INITIAL_STATE, rootReducer } from './store';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgReduxModule
+    NgReduxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(ngRedux: NgRedux<IAppState>, devTools: DevToolsExtension) {
+  constructor(ngRedux: NgRedux<Map<string, any>>, devTools: DevToolsExtension) {
     var enhancers = isDevMode() ? [devTools.enhancer()] : [];
-    ngRedux.configureStore(rootReducer, INITIAL_STATE, [], enhancers);
+    ngRedux.configureStore(rootReducer, Object.assign(fromJS(INITIAL_STATE)), [], enhancers);
   }
 }

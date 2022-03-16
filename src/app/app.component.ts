@@ -12,13 +12,14 @@ import { IAppState, INITIAL_STATE } from './store';
 })
 export class AppComponent {
   title = 'Demo App';
-  public get counter() : number {
-    const state = this.ngRedux.getState();
-    return state?.counter || 0;
-  }
-  
+  // public get counter() : number {
+  //   const state = this.ngRedux.getState();
+  //   return state?.counter || 0;
+  // }
+  @select(s => s.get('counter')) counter$: any;
 
   constructor(private ngRedux: NgRedux<IAppState>) {
+
   }
 
   increment() {
